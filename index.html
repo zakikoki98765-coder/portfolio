@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="Thoughtful, modern websites for businesses. I design and build responsive business websites, restaurant websites and landing pages with an AI-assisted workflow.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Zaki Koki — Independent Web Designer & Developer">
+  <meta property="og:description" content="Modern, responsive websites that help businesses show up with confidence.">
+  <title>Zaki Koki — Independent Web Designer & Developer</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f4ef;
+      --paper-deep: #ebeae4;
+      --ink: #202321;
+      --muted: #656963;
+      --line: #d9d9d2;
+      --blue: #3158e8;
+      --blue-dark: #2346c6;
+      --white: #fffefa;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --content: 1180px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    body, button, input, select, textarea { font-family: var(--sans); }
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    .wrap { width: min(var(--content), calc(100% - 96px)); margin-inline: auto; }
+    .eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      margin: 0 0 21px; color: var(--muted);
+      font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    }
+    .eyebrow::before { width: 22px; height: 1px; background: var(--blue); content: ""; }
+    .section { padding: 112px 0; border-top: 1px solid var(--line); }
+    .section-heading { max-width: 740px; margin-bottom: 52px; }
+    .section-heading h2 {
+      margin: 0; font-size: clamp(38px, 5.2vw, 66px); line-height: .99;
+      letter-spacing: -.065em; font-weight: 550;
+    }
+    .section-heading h2 em { color: var(--blue); font-family: var(--serif); font-weight: 400; }
+    .section-heading p:not(.eyebrow) {
+      max-width: 510px; margin: 21px 0 0; color: var(--muted);
+      font-size: 16px; line-height: 1.7;
+    }
+    .button {
+      display: inline-flex; min-height: 52px; align-items: center; justify-content: center; gap: 14px;
+      padding: 0 21px; border: 1px solid var(--blue); background: var(--blue); color: white;
+      text-decoration: none; font-size: 13px; font-weight: 650;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .button:hover { background: var(--blue-dark); border-color: var(--blue-dark); transform: translateY(-2px); }
+    .button svg { width: 15px; height: 15px; }
+    .button.secondary { color: var(--ink); background: transparent; border-color: var(--line); }
+    .button.secondary:hover { border-color: var(--ink); background: var(--white); }
+    .text-link {
+      display: inline-flex; align-items: center; gap: 9px; color: var(--blue);
+      font-size: 13px; font-weight: 700; text-decoration: none;
+    }
+    .text-link svg { width: 15px; height: 15px; transition: transform .2s ease; }
+    .text-link:hover svg { transform: translate(3px, -2px); }
+
+    /* Header */
+    .site-header {
+      position: sticky; z-index: 20; top: 0; background: rgba(245,244,239,.96);
+      border-bottom: 1px solid var(--line); backdrop-filter: blur(12px);
+    }
+    .nav-shell { display: flex; height: 76px; align-items: center; justify-content: space-between; gap: 32px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; flex-shrink: 0; text-decoration: none; }
+    .brand-mark {
+      display: grid; width: 33px; height: 33px; place-items: center;
+      background: var(--ink); color: var(--paper); font-size: 12px; font-weight: 700; letter-spacing: -.08em;
+    }
+    .brand-name { font-size: 13px; font-weight: 700; letter-spacing: -.025em; }
+    .brand-name span { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; font-weight: 500; letter-spacing: .09em; text-transform: uppercase; }
+    .main-nav { display: flex; align-items: center; gap: clamp(18px, 2.8vw, 36px); }
+    .main-nav a:not(.button) {
+      color: #494d49; font-size: 12px; text-decoration: none; transition: color .2s ease;
+    }
+    .main-nav a:not(.button):hover { color: var(--blue); }
+    .nav-cta { min-height: 42px; padding-inline: 16px; font-size: 11px; }
+    .menu-toggle { display: none; width: 44px; height: 44px; border: 1px solid var(--line); background: transparent; color: var(--ink); }
+
+    /* Hero */
+    .hero { overflow: hidden; padding: 85px 0 77px; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.03fr) minmax(360px, .97fr); align-items: center; gap: clamp(48px, 8vw, 112px); }
+    .hero-copy { position: relative; z-index: 1; }
+    .hero-copy .eyebrow { margin-bottom: 27px; }
+    .hero h1 {
+      max-width: 700px; margin: 0; font-size: clamp(54px, 7.3vw, 88px);
+      line-height: .94; letter-spacing: -.085em; font-weight: 550;
+    }
+    .hero h1 em { color: var(--blue); font-family: var(--serif); font-weight: 400; letter-spacing: -.08em; }
+    .hero-lede { max-width: 500px; margin: 28px 0 31px; color: var(--muted); font-size: 16px; line-height: 1.75; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-note { display: flex; align-items: center; gap: 10px; margin-top: 38px; color: var(--muted); font-size: 11px; }
+    .availability-dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #4c9c71; }
+    .availability-dot::after { position: absolute; inset: -4px; border: 1px solid #4c9c71; border-radius: 50%; content: ""; }
+    .hero-art {
+      position: relative; min-height: 450px; display: grid; align-items: center;
+      background: var(--paper-deep); padding: 30px; overflow: hidden;
+    }
+    .hero-art::before {
+      position: absolute; width: 280px; height: 280px; top: -105px; right: -75px;
+      border: 1px solid rgba(49,88,232,.28); border-radius: 50%; content: "";
+    }
+    .hero-art::after {
+      position: absolute; width: 210px; height: 210px; bottom: -120px; left: -60px;
+      border: 1px solid rgba(49,88,232,.24); border-radius: 50%; content: "";
+    }
+    .art-label { position: absolute; z-index: 2; top: 25px; left: 27px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .browser-card {
+      position: relative; z-index: 1; width: 100%; max-width: 440px; margin: 26px auto 0;
+      background: var(--white); box-shadow: 0 18px 50px rgba(36,39,33,.12);
+      transform: rotate(-2deg); transition: transform .4s ease;
+    }
+    .hero-art:hover .browser-card { transform: rotate(0) translateY(-4px); }
+    .browser-top { display: flex; height: 34px; align-items: center; gap: 5px; padding: 0 12px; border-bottom: 1px solid #e9e8e1; }
+    .browser-top i { width: 5px; height: 5px; border-radius: 50%; background: #cccac2; }
+    .browser-address { width: 39%; height: 12px; margin-left: 11px; background: #f0efe9; }
+    .browser-content { padding: 27px 25px 23px; }
+    .mock-meta { display: flex; justify-content: space-between; color: #777b76; font-size: 8px; letter-spacing: .11em; text-transform: uppercase; }
+    .mock-headline { max-width: 265px; margin: 28px 0 17px; font-size: clamp(28px, 4vw, 43px); line-height: .94; letter-spacing: -.075em; }
+    .mock-headline span { color: var(--blue); font-family: var(--serif); font-style: italic; font-weight: 400; }
+    .mock-lines { width: 63%; height: 5px; margin: 6px 0; background: #e5e4dd; }
+    .mock-lines.short { width: 43%; }
+    .mock-action { display: inline-flex; align-items: center; gap: 12px; margin-top: 19px; padding: 9px 11px; background: var(--blue); color: white; font-size: 8px; letter-spacing: .06em; text-transform: uppercase; }
+    .mock-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 24px; }
+    .mock-tile { min-height: 92px; padding: 12px; background: #efeee8; }
+    .mock-tile.blue { background: var(--blue); color: white; }
+    .mock-tile span { display: block; font-family: var(--serif); font-size: 23px; }
+    .mock-tile small { display: block; margin-top: 22px; font-size: 7px; letter-spacing: .1em; text-transform: uppercase; }
+    .art-index { position: absolute; bottom: 24px; right: 26px; color: var(--muted); font-size: 10px; letter-spacing: .1em; }
+    .side-note { position: absolute; z-index: 2; right: 22px; bottom: 74px; width: 116px; padding: 13px; background: var(--blue); color: white; font-family: var(--serif); font-size: 13px; line-height: 1.25; transform: rotate(4deg); }
+
+    /* Positioning strip */
+    .proof { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .proof-grid { display: grid; grid-template-columns: 1.2fr repeat(4, 1fr); align-items: center; min-height: 104px; gap: 25px; }
+    .proof-intro { color: var(--muted); font-family: var(--serif); font-size: 15px; font-style: italic; }
+    .proof-item { display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 650; }
+    .proof-item svg { flex: 0 0 17px; width: 17px; height: 17px; color: var(--blue); }
+
+    /* Selected work */
+    .work-section { padding-bottom: 120px; }
+    .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+    .project-card { min-width: 0; }
+    .project-preview {
+      position: relative; display: flex; min-height: 380px; align-items: center; justify-content: center;
+      overflow: hidden; text-decoration: none; isolation: isolate;
+    }
+    .project-preview::after { position: absolute; z-index: -1; inset: 0; background: rgba(20,22,21,0); content: ""; transition: background .25s ease; }
+    .project-preview:hover::after { background: rgba(20,22,21,.07); }
+    .project-preview.luna { background: #e7ddd0; }
+    .project-preview.nova { background: #dfe3df; }
+    .project-tag { position: absolute; top: 19px; left: 20px; color: #555750; font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+    .preview-open { position: absolute; top: 16px; right: 18px; display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(32,35,33,.3); border-radius: 50%; transition: background .2s ease, color .2s ease; }
+    .project-preview:hover .preview-open { background: var(--ink); color: white; }
+    .preview-open svg { width: 14px; height: 14px; }
+    .luna-window {
+      position: relative; width: 78%; max-width: 420px; min-height: 270px; padding: 18px 21px;
+      background: #f8f2e8; box-shadow: 0 15px 40px rgba(43,32,21,.15); transition: transform .35s ease;
+    }
+    .project-preview:hover .luna-window { transform: translateY(-5px) rotate(-1deg); }
+    .luna-nav { display: flex; justify-content: space-between; color: #5c4b3f; font-size: 7px; letter-spacing: .13em; text-transform: uppercase; }
+    .luna-title { margin: 38px 0 7px; color: #332921; font-family: var(--serif); font-size: clamp(34px, 5vw, 54px); line-height: .88; letter-spacing: -.06em; }
+    .luna-title span { color: #a34d30; font-style: italic; }
+    .luna-copy { max-width: 180px; color: #66594e; font-family: var(--serif); font-size: 10px; line-height: 1.5; }
+    .luna-button { display: inline-block; margin-top: 14px; padding: 9px 11px; background: #a34d30; color: white; font-size: 7px; letter-spacing: .12em; text-transform: uppercase; }
+    .luna-sun { position: absolute; width: 100px; height: 100px; right: 20px; bottom: 34px; border-radius: 50%; background: #d4a77d; }
+    .luna-plate { position: absolute; right: 34px; bottom: 47px; width: 72px; height: 72px; border: 6px solid #f8f2e8; border-radius: 50%; background: #6c754b; box-shadow: inset 0 0 0 5px #dbb078; }
+    .nova-window {
+      width: 78%; max-width: 420px; min-height: 270px; padding: 18px 22px;
+      background: #fafbf8; box-shadow: 0 15px 40px rgba(27,35,30,.14); transition: transform .35s ease;
+    }
+    .project-preview:hover .nova-window { transform: translateY(-5px) rotate(1deg); }
+    .nova-nav { display: flex; justify-content: space-between; align-items: center; color: #28312e; font-size: 7px; letter-spacing: .08em; text-transform: uppercase; }
+    .nova-logo { font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+    .nova-title { margin: 45px 0 10px; color: #26322e; font-size: clamp(34px, 5vw, 53px); line-height: .88; letter-spacing: -.075em; }
+    .nova-title em { color: #70877d; font-family: var(--serif); font-weight: 400; }
+    .nova-copy { max-width: 170px; color: #6d746f; font-size: 9px; line-height: 1.55; }
+    .nova-rule { width: 55px; height: 2px; margin-top: 17px; background: #7e988b; }
+    .nova-orbit { position: absolute; right: 19px; bottom: 26px; width: 110px; height: 110px; border: 1px solid #bac6bd; border-radius: 50%; }
+    .nova-orbit::before { position: absolute; width: 72px; height: 72px; top: 18px; left: 18px; border: 1px solid #bac6bd; border-radius: 50%; content: ""; }
+    .nova-orbit::after { position: absolute; width: 31px; height: 31px; top: 39px; left: 39px; border-radius: 50%; background: #869d90; content: ""; }
+    .project-info { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 21px 0 0; }
+    .project-info h3 { margin: 0; font-size: 23px; letter-spacing: -.045em; font-weight: 550; }
+    .project-category { margin: 6px 0 0; color: var(--muted); font-size: 11px; }
+    .project-desc { max-width: 390px; margin: 16px 0 13px; color: #555a54; font-size: 13px; line-height: 1.65; }
+    .tech-list { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
+    .tech-list span { padding: 5px 8px; border: 1px solid var(--line); color: #60645f; font-size: 9px; }
+    .project-number { color: var(--muted); font-family: var(--serif); font-size: 15px; }
+
+    /* Services */
+    .services-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 100px; align-items: start; }
+    .services-layout .section-heading { position: sticky; top: 120px; margin: 0; }
+    .service-list { border-top: 1px solid var(--line); }
+    .service-row { display: grid; grid-template-columns: 46px 1fr 32px; gap: 19px; align-items: start; padding: 24px 0; border-bottom: 1px solid var(--line); }
+    .service-index { padding-top: 5px; color: var(--blue); font-family: var(--serif); font-size: 14px; }
+    .service-row h3 { margin: 0; font-size: 19px; letter-spacing: -.04em; font-weight: 550; }
+    .service-row p { max-width: 500px; margin: 8px 0 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .service-icon { width: 23px; height: 23px; color: var(--blue); }
+    .services-foot { margin-top: 27px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+    /* Process */
+    .process { background: #222624; color: var(--paper); }
+    .process .eyebrow { color: #b3b7b1; }
+    .process .section-heading p:not(.eyebrow) { color: #b4b8b2; }
+    .process .section-heading h2 em { color: #92a6ff; }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #505550; }
+    .process-step { min-height: 223px; padding: 23px 23px 0 0; }
+    .process-step + .process-step { padding-left: 23px; border-left: 1px solid #505550; }
+    .step-number { display: block; margin-bottom: 44px; color: #92a6ff; font-family: var(--serif); font-size: 15px; }
+    .process-step h3 { margin: 0 0 11px; font-size: 20px; font-weight: 550; letter-spacing: -.04em; }
+    .process-step p { max-width: 220px; margin: 0; color: #b4b8b2; font-size: 12px; line-height: 1.7; }
+
+    /* About and reasons */
+    .about-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 100px; }
+    .about-stamp {
+      display: flex; min-height: 330px; flex-direction: column; align-items: flex-start; justify-content: space-between;
+      padding: 25px; border: 1px solid var(--line); background: var(--paper-deep);
+    }
+    .stamp-mark { display: grid; width: 59px; height: 59px; place-items: center; background: var(--blue); color: white; font-size: 18px; font-weight: 700; letter-spacing: -.1em; }
+    .stamp-quote { max-width: 250px; margin: auto 0 0; font-family: var(--serif); font-size: 29px; line-height: 1.1; letter-spacing: -.035em; }
+    .stamp-caption { margin: 18px 0 0; color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .about-copy h2 { max-width: 620px; margin: 0 0 24px; font-size: clamp(36px, 4.8vw, 56px); line-height: 1; letter-spacing: -.07em; font-weight: 550; }
+    .about-copy h2 em { color: var(--blue); font-family: var(--serif); font-weight: 400; }
+    .about-copy p { max-width: 620px; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .about-signoff { display: flex; align-items: center; gap: 13px; margin-top: 31px; color: var(--ink); font-size: 12px; font-weight: 650; }
+    .signoff-line { width: 34px; height: 1px; background: var(--blue); }
+    .benefits { padding-top: 0; border-top: 0; }
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+    .benefit { min-height: 148px; padding: 22px 24px 20px 0; border-bottom: 1px solid var(--line); }
+    .benefit:nth-child(3n+2), .benefit:nth-child(3n+3) { padding-left: 24px; border-left: 1px solid var(--line); }
+    .benefit-index { color: var(--blue); font-family: var(--serif); font-size: 13px; }
+    .benefit h3 { margin: 17px 0 7px; font-size: 16px; font-weight: 600; letter-spacing: -.025em; }
+    .benefit p { max-width: 280px; margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+    /* FAQ */
+    .faq-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 100px; }
+    .faq-layout .section-heading { margin: 0; }
+    .faq-list { border-top: 1px solid var(--line); }
+    .faq-list details { border-bottom: 1px solid var(--line); }
+    .faq-list summary {
+      position: relative; display: flex; min-height: 69px; align-items: center; justify-content: space-between;
+      gap: 18px; padding: 16px 35px 16px 0; cursor: pointer; list-style: none;
+      font-size: 14px; font-weight: 600; letter-spacing: -.015em;
+    }
+    .faq-list summary::-webkit-details-marker { display: none; }
+    .faq-list summary::after { position: absolute; right: 2px; content: "+"; color: var(--blue); font-size: 22px; font-weight: 400; transition: transform .2s ease; }
+    .faq-list details[open] summary::after { transform: rotate(45deg); }
+    .faq-answer { max-width: 590px; padding: 0 25px 20px 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+
+    /* Contact */
+    .cta-band { padding: 71px 0; background: var(--blue); color: white; }
+    .cta-grid { display: flex; align-items: center; justify-content: space-between; gap: 45px; }
+    .cta-copy .eyebrow { color: rgba(255,255,255,.76); }
+    .cta-copy .eyebrow::before { background: white; }
+    .cta-copy h2 { max-width: 690px; margin: 0; font-size: clamp(38px, 5.2vw, 64px); line-height: .99; letter-spacing: -.07em; font-weight: 550; }
+    .cta-copy p { max-width: 500px; margin: 17px 0 0; color: rgba(255,255,255,.82); font-size: 14px; line-height: 1.7; }
+    .cta-band .button { flex: 0 0 auto; border-color: white; background: white; color: var(--ink); }
+    .cta-band .button:hover { background: #eceeff; border-color: #eceeff; }
+    .contact { padding-bottom: 115px; }
+    .contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 100px; }
+    .contact-aside h2 { margin: 0; font-size: clamp(36px, 4.5vw, 56px); line-height: 1; letter-spacing: -.07em; font-weight: 550; }
+    .contact-aside h2 em { color: var(--blue); font-family: var(--serif); font-weight: 400; }
+    .contact-aside > p { max-width: 350px; margin: 18px 0 28px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+    .contact-detail { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 12px; }
+    .contact-detail svg { width: 17px; height: 17px; color: var(--blue); }
+    .contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 17px; }
+    .field { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: 11px; font-weight: 650; }
+    .field input, .field select, .field textarea {
+      width: 100%; min-height: 49px; border: 1px solid var(--line); border-radius: 0;
+      padding: 12px 13px; background: var(--white); color: var(--ink); font-size: 13px;
+    }
+    .field textarea { min-height: 128px; resize: vertical; }
+    .field input::placeholder, .field textarea::placeholder { color: #92958f; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blue); outline: 2px solid rgba(49,88,232,.16); }
+    .form-bottom { display: flex; grid-column: 1 / -1; align-items: center; justify-content: space-between; gap: 18px; }
+    .form-note { max-width: 300px; margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+    .form-status { grid-column: 1/-1; min-height: 20px; margin: 0; color: var(--blue-dark); font-size: 12px; line-height: 1.5; }
+
+    /* Footer */
+    .site-footer { padding: 35px 0 25px; border-top: 1px solid var(--line); }
+    .footer-main { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 35px; padding-bottom: 36px; }
+    .footer-brand p { max-width: 230px; margin: 15px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .footer-column h3 { margin: 0 0 15px; color: var(--muted); font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+    .footer-column a { display: block; width: fit-content; margin: 9px 0; font-size: 11px; text-decoration: none; }
+    .footer-column a:hover { color: var(--blue); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 10px; }
+
+    @media (max-width: 1000px) {
+      .wrap { width: min(var(--content), calc(100% - 56px)); }
+      .main-nav { gap: 17px; }
+      .main-nav a:not(.button) { font-size: 11px; }
+      .hero-grid { grid-template-columns: 1fr .85fr; gap: 35px; }
+      .hero-art { min-height: 390px; padding: 22px; }
+      .side-note { right: 10px; bottom: 53px; }
+      .proof-grid { grid-template-columns: repeat(4,1fr); gap: 16px; padding-block: 22px; }
+      .proof-intro { grid-column: 1 / -1; }
+      .services-layout, .about-grid, .faq-layout, .contact-grid { gap: 55px; }
+      .project-preview { min-height: 320px; }
+      .luna-window, .nova-window { width: 84%; }
+    }
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 72px; }
+      .wrap { width: calc(100% - 40px); }
+      .section { padding: 77px 0; }
+      .section-heading { margin-bottom: 35px; }
+      .section-heading h2 { font-size: clamp(38px, 9vw, 56px); }
+      .section-heading p:not(.eyebrow) { margin-top: 16px; font-size: 14px; }
+      .nav-shell { height: 66px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .menu-toggle svg { width: 20px; height: 20px; }
+      .main-nav {
+        position: absolute; top: 65px; right: 0; left: 0; display: none; align-items: stretch;
+        flex-direction: column; gap: 0; padding: 8px 20px 18px; border-bottom: 1px solid var(--line);
+        background: var(--paper); box-shadow: 0 14px 24px rgba(32,35,33,.08);
+      }
+      .main-nav.is-open { display: flex; }
+      .main-nav a:not(.button) { padding: 13px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+      .main-nav .nav-cta { width: 100%; margin-top: 14px; }
+      .hero { padding: 57px 0 48px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 38px; }
+      .hero h1 { max-width: 560px; font-size: clamp(53px, 11.7vw, 78px); }
+      .hero-lede { max-width: 500px; margin: 21px 0 25px; font-size: 14px; }
+      .hero-note { margin-top: 25px; }
+      .hero-art { min-height: 350px; }
+      .browser-card { max-width: 390px; }
+      .side-note { right: 14px; bottom: 46px; }
+      .proof-grid { grid-template-columns: 1fr 1fr; gap: 18px 12px; padding: 21px 0; }
+      .proof-intro { grid-column: 1/-1; }
+      .proof-item { font-size: 10px; }
+      .work-section { padding-bottom: 78px; }
+      .work-grid { grid-template-columns: 1fr; gap: 36px; }
+      .project-preview { min-height: 330px; }
+      .project-info h3 { font-size: 21px; }
+      .services-layout, .about-grid, .faq-layout, .contact-grid { grid-template-columns: 1fr; gap: 35px; }
+      .services-layout .section-heading { position: static; }
+      .service-row { grid-template-columns: 30px 1fr 25px; gap: 12px; padding: 20px 0; }
+      .service-row h3 { font-size: 17px; }
+      .service-row p { font-size: 12px; }
+      .service-icon { width: 20px; height: 20px; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .process-step { min-height: 190px; padding: 18px 16px 22px 0; }
+      .process-step + .process-step { padding-left: 16px; }
+      .process-step:nth-child(3) { padding-left: 0; border-left: 0; border-top: 1px solid #505550; }
+      .process-step:nth-child(4) { border-top: 1px solid #505550; }
+      .step-number { margin-bottom: 28px; }
+      .process-step p { font-size: 11px; }
+      .about-stamp { min-height: 265px; }
+      .about-copy h2 { font-size: clamp(39px, 9vw, 54px); }
+      .about-copy p { font-size: 14px; }
+      .benefits { padding-top: 0; }
+      .benefit-grid { grid-template-columns: 1fr 1fr; }
+      .benefit { min-height: 137px; padding: 18px 13px 17px 0; }
+      .benefit:nth-child(3n+2), .benefit:nth-child(3n+3) { padding-left: 13px; }
+      .benefit:nth-child(odd) { padding-left: 0; border-left: 0; }
+      .benefit:nth-child(even) { padding-left: 13px; border-left: 1px solid var(--line); }
+      .benefit h3 { margin-top: 13px; font-size: 14px; }
+      .benefit p { font-size: 11px; }
+      .cta-band { padding: 49px 0; }
+      .cta-grid { align-items: flex-start; flex-direction: column; gap: 27px; }
+      .cta-copy h2 { font-size: clamp(40px, 9vw, 59px); }
+      .cta-copy p { font-size: 13px; }
+      .contact { padding-bottom: 78px; }
+      .contact-form { gap: 15px 12px; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
+      .footer-brand { grid-column: 1/-1; }
+    }
+    @media (max-width: 420px) {
+      .wrap { width: calc(100% - 32px); }
+      .nav-shell { gap: 10px; }
+      .brand-name { width: 160px; font-size: 12px; }
+      .brand-name span { font-size: 8px; letter-spacing: .07em; }
+      .menu-toggle { flex: 0 0 44px; }
+      .hero { padding-top: 48px; }
+      .hero h1 { font-size: clamp(49px, 12.3vw, 60px); }
+      .hero-actions { align-items: stretch; flex-direction: column; }
+      .hero-actions .button { width: 100%; }
+      .hero-art { min-height: 310px; padding: 17px; }
+      .browser-content { padding: 21px 17px 17px; }
+      .mock-headline { margin-top: 24px; }
+      .mock-tile { min-height: 75px; }
+      .mock-tile span { font-size: 19px; }
+      .mock-tile small { margin-top: 16px; }
+      .side-note { width: 92px; font-size: 11px; }
+      .proof-grid { gap: 17px 8px; }
+      .proof-item { gap: 7px; font-size: 9px; }
+      .proof-item svg { flex-basis: 15px; width: 15px; height: 15px; }
+      .project-preview { min-height: 276px; }
+      .luna-window, .nova-window { min-height: 228px; padding: 15px; }
+      .luna-title, .nova-title { margin-top: 35px; font-size: 37px; }
+      .luna-sun { width: 77px; height: 77px; right: 16px; bottom: 25px; }
+      .luna-plate { width: 56px; height: 56px; right: 27px; bottom: 35px; }
+      .nova-orbit { width: 83px; height: 83px; right: 13px; bottom: 20px; }
+      .nova-orbit::before { width: 53px; height: 53px; top: 14px; left: 14px; }
+      .nova-orbit::after { width: 23px; height: 23px; top: 29px; left: 29px; }
+      .project-desc { font-size: 12px; }
+      .contact-form { grid-template-columns: 1fr; }
+      .field.full, .form-bottom, .form-status { grid-column: 1; }
+      .form-bottom { align-items: flex-start; flex-direction: column; }
+      .form-bottom .button { width: 100%; }
+      .footer-bottom { flex-direction: column; gap: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav-shell">
+      <a class="brand" href="#top" aria-label="Zaki Koki — home">
+        <span class="brand-mark" aria-hidden="true">ZK</span>
+        <span class="brand-name">Zaki Koki<span>Independent designer & developer</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="main-nav" id="primary-nav" aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+        <a class="button nav-cta" href="#contact">Start a Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Independent web design & development</p>
+          <h1>I build websites that make businesses <em>look better</em> online.</h1>
+          <p class="hero-lede">I create thoughtful, modern websites that help businesses present what they do with clarity and confidence—designed for real people, on every screen.</p>
+          <div class="hero-actions">
+            <a class="button" href="#contact">Start a Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+            <a class="button secondary" href="#work">View My Work</a>
+          </div>
+          <p class="hero-note"><span class="availability-dot" aria-hidden="true"></span> Thoughtful websites, built with care and a modern workflow.</p>
+        </div>
+        <div class="hero-art" aria-label="A visual concept of a modern website displayed in a browser window">
+          <span class="art-label">A considered online presence</span>
+          <div class="browser-card" aria-hidden="true">
+            <div class="browser-top"><i></i><i></i><i></i><div class="browser-address"></div></div>
+            <div class="browser-content">
+              <div class="mock-meta"><span>Good work, clearly seen.</span><span>01 / 04</span></div>
+              <h2 class="mock-headline">Make your next<br>move <span>matter.</span></h2>
+              <div class="mock-lines"></div><div class="mock-lines short"></div>
+              <span class="mock-action">Explore what we do <span aria-hidden="true">↗</span></span>
+              <div class="mock-bottom">
+                <div class="mock-tile"><span>01</span><small>Built around your business</small></div>
+                <div class="mock-tile blue"><span>↗</span><small>Made for every screen</small></div>
+              </div>
+            </div>
+          </div>
+          <span class="side-note">Clear thinking.<br>Good design.<br>Better first impressions.</span>
+          <span class="art-index">DESIGN / BUILD / LAUNCH</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" aria-label="How I work">
+      <div class="wrap proof-grid">
+        <span class="proof-intro">Good websites start with the right things.</span>
+        <span class="proof-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="2" width="14" height="16" rx="1"/><path d="M7 15h6"/></svg>Responsive by design</span>
+        <span class="proof-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 16.5 16.5 3M5 5h.01M15 15h.01"/><circle cx="10" cy="10" r="8"/></svg>Modern, considered UI</span>
+        <span class="proof-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M11.5 2 4 11h5l-.5 7L16 9h-5l.5-7Z"/></svg>Efficient workflow</span>
+        <span class="proof-item"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M10 2.5v15M2.5 10h15M4.7 4.7l10.6 10.6m0-10.6L4.7 15.3"/></svg>AI-assisted, reviewed</span>
+      </div>
+    </section>
+
+    <section class="section work-section" id="work">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">Selected work</p>
+          <h2>Good work deserves<br>a <em>closer look.</em></h2>
+          <p>Two website projects, each shaped around its own audience, atmosphere and purpose.</p>
+        </div>
+        <div class="work-grid">
+          <article class="project-card">
+            <a class="project-preview luna" href="https://zakikoki98765-coder.github.io/luna-restaurant/" target="_blank" rel="noopener noreferrer" aria-label="View Luna Restaurant website, opens in a new tab">
+              <span class="project-tag">Restaurant / Digital experience</span>
+              <span class="preview-open"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 11 12 4M5 4h7v7"/></svg></span>
+              <div class="luna-window" aria-hidden="true">
+                <div class="luna-nav"><span>Luna / Restaurant</span><span>Menu&nbsp;&nbsp;&nbsp; Visit</span></div>
+                <h3 class="luna-title">A little<br><span>taste of</span> Italy.</h3>
+                <p class="luna-copy">Gather around the table. Seasonal cooking, made with heart.</p>
+                <span class="luna-button">Discover Luna</span>
+                <span class="luna-sun"></span><span class="luna-plate"></span>
+              </div>
+            </a>
+            <div class="project-info">
+              <div>
+                <h3>Luna Restaurant</h3>
+                <p class="project-category">Restaurant Website</p>
+              </div>
+              <span class="project-number">01</span>
+            </div>
+            <p class="project-desc">A warm, inviting online home designed to bring the restaurant’s atmosphere, food and essential visitor information together.</p>
+            <div class="tech-list" aria-label="Technologies used"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <a class="text-link" href="https://zakikoki98765-coder.github.io/luna-restaurant/" target="_blank" rel="noopener noreferrer">View Live Website <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg></a>
+          </article>
+          <article class="project-card">
+            <a class="project-preview nova" href="https://zakikoki98765-coder.github.io/nova-studio/" target="_blank" rel="noopener noreferrer" aria-label="View NOVA Studio website, opens in a new tab">
+              <span class="project-tag">Creative studio / Brand presence</span>
+              <span class="preview-open"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 11 12 4M5 4h7v7"/></svg></span>
+              <div class="nova-window" aria-hidden="true">
+                <div class="nova-nav"><span class="nova-logo">NOVA®</span><span>Studio&nbsp;&nbsp;&nbsp; Projects&nbsp;&nbsp;&nbsp; About</span></div>
+                <h3 class="nova-title">Ideas into<br><em>impact.</em></h3>
+                <p class="nova-copy">Independent creative studio for brands with something to say.</p>
+                <div class="nova-rule"></div><span class="nova-orbit"></span>
+              </div>
+            </a>
+            <div class="project-info">
+              <div>
+                <h3>NOVA Studio</h3>
+                <p class="project-category">Creative Agency Website</p>
+              </div>
+              <span class="project-number">02</span>
+            </div>
+            <p class="project-desc">A confident, editorial-style presence for a creative studio, with a clear story and a distinct visual point of view.</p>
+            <div class="tech-list" aria-label="Technologies used"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            <a class="text-link" href="https://zakikoki98765-coder.github.io/nova-studio/" target="_blank" rel="noopener noreferrer">View Live Website <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="wrap services-layout">
+        <div class="section-heading">
+          <p class="eyebrow">What I can help with</p>
+          <h2>From first idea<br>to <em>online.</em></h2>
+          <p>Focused website services for businesses that want a more considered, useful presence on the web.</p>
+        </div>
+        <div>
+          <div class="service-list">
+            <article class="service-row">
+              <span class="service-index">01</span><div><h3>Business Websites</h3><p>A clear, professional home for your business that explains what you do and makes the next step obvious.</p></div>
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="4" width="18" height="16"/><path d="M3 8h18M7 6h.01M10 6h.01"/></svg>
+            </article>
+            <article class="service-row">
+              <span class="service-index">02</span><div><h3>Restaurant Websites</h3><p>Showcase your menu, atmosphere and essential details so guests can picture their visit before they arrive.</p></div>
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 3v8m-3-8v5a3 3 0 0 0 6 0V3m-3 8v10m10-18v18m0-18c-2 2-3 4-3 7h3"/></svg>
+            </article>
+            <article class="service-row">
+              <span class="service-index">03</span><div><h3>Landing Pages</h3><p>A focused page for a product, service or campaign—with a sharper message and a clear call to action.</p></div>
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l3-4 3 2 5-7"/></svg>
+            </article>
+            <article class="service-row">
+              <span class="service-index">04</span><div><h3>Responsive Web Design</h3><p>Layouts and interactions designed to feel considered and easy to use on phones, tablets and desktops.</p></div>
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="4" width="13" height="15"/><path d="M19 8h2v12h-8v-1M7 16h5"/></svg>
+            </article>
+            <article class="service-row">
+              <span class="service-index">05</span><div><h3>Website Redesign</h3><p>Give an existing website a more current feel, easier navigation and a stronger fit for your business today.</p></div>
+              <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 7h12M4 12h8M4 17h6m8-8 4 4-6 6-4 1 1-4 5-7Z"/></svg>
+            </article>
+          </div>
+          <p class="services-foot">Not sure what you need yet? Tell me a little about the business and we can find the right starting point.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process" id="process">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">How I work</p>
+          <h2>A good result comes<br>from a <em>clear process.</em></h2>
+          <p>Thoughtful from the first conversation to the final checks before launch.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-step"><span class="step-number">01</span><h3>Understand</h3><p>I learn about your business, audience, goals and what the project needs to do.</p></article>
+          <article class="process-step"><span class="step-number">02</span><h3>Plan</h3><p>I define the structure, content hierarchy and visual direction before building.</p></article>
+          <article class="process-step"><span class="step-number">03</span><h3>Build</h3><p>I use an AI-assisted development workflow, then carefully review and refine the implementation.</p></article>
+          <article class="process-step"><span class="step-number">04</span><h3>Launch</h3><p>I check the experience across screens and prepare the website for deployment.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap about-grid">
+        <div class="about-stamp" aria-label="Design with intention">
+          <span class="stamp-mark" aria-hidden="true">ZK</span>
+          <p class="stamp-quote">The web is often the first hello. Make it a good one.</p>
+          <p class="stamp-caption">A little about my approach</p>
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">A bit about me</p>
+          <h2>Websites with purpose, made for <em>people.</em></h2>
+          <p>I’m Zaki, an independent web designer and developer focused on helping businesses establish a strong online presence. I bring together modern design, responsive development and an AI-assisted workflow to make the path from idea to finished website more efficient.</p>
+          <p>Technology is part of the process, not the point. Every project still needs a clear message, thoughtful decisions and a careful human review. That’s how I aim to make websites that feel right for the business behind them.</p>
+          <div class="about-signoff"><span class="signoff-line"></span> Zaki Koki</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section benefits" aria-labelledby="benefits-title">
+      <div class="wrap">
+        <div class="section-heading">
+          <p class="eyebrow">Why work with me</p>
+          <h2 id="benefits-title">A website that feels <em>like yours.</em></h2>
+        </div>
+        <div class="benefit-grid">
+          <article class="benefit"><span class="benefit-index">01</span><h3>Modern design</h3><p>A considered visual identity that helps your business make a confident first impression.</p></article>
+          <article class="benefit"><span class="benefit-index">02</span><h3>Mobile-first thinking</h3><p>Layouts shaped for the small screen, then thoughtfully adapted to larger ones.</p></article>
+          <article class="benefit"><span class="benefit-index">03</span><h3>Efficient workflow</h3><p>AI-assisted development helps move quickly, with care taken to review what gets built.</p></article>
+          <article class="benefit"><span class="benefit-index">04</span><h3>Attention to detail</h3><p>Clear hierarchy, considered spacing and the finishing touches that make it feel complete.</p></article>
+          <article class="benefit"><span class="benefit-index">05</span><h3>Clear communication</h3><p>Practical conversations and a straightforward process, so you know what comes next.</p></article>
+          <article class="benefit"><span class="benefit-index">06</span><h3>Custom solutions</h3><p>Your website is shaped around your needs—not a one-size-fits-all template.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap faq-layout">
+        <div class="section-heading">
+          <p class="eyebrow">Frequently asked</p>
+          <h2>A few things<br>you might <em>wonder.</em></h2>
+          <p>Still have a question? Send me a note and I’ll be happy to talk it through.</p>
+        </div>
+        <div class="faq-list">
+          <details><summary>What kind of websites do you build?</summary><div class="faq-answer">I focus on professional business websites, restaurant websites, landing pages and redesigns. We can shape the scope around what your business needs.</div></details>
+          <details><summary>Do you work with small businesses?</summary><div class="faq-answer">Yes. My work is focused on helping businesses present themselves clearly online, including small and independent businesses.</div></details>
+          <details><summary>Can you build responsive websites?</summary><div class="faq-answer">Yes. I design for phones, tablets and desktop screens, with layouts and interactions adapted for each size.</div></details>
+          <details><summary>How does the project process work?</summary><div class="faq-answer">We start by understanding your business and goals, then plan the structure and visual direction, build and review the site, and prepare it for launch.</div></details>
+          <details><summary>Can I provide my own domain and hosting?</summary><div class="faq-answer">Absolutely. You can use a domain and hosting you already have. We can also discuss practical deployment options that suit the website.</div></details>
+          <details><summary>Can an existing website be redesigned?</summary><div class="faq-answer">Yes. I can help rethink its visual direction, structure and responsive experience so it better reflects your business today.</div></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band" aria-labelledby="cta-title">
+      <div class="wrap cta-grid">
+        <div class="cta-copy">
+          <p class="eyebrow">Your next chapter online</p>
+          <h2 id="cta-title">Have a business that deserves a better website?</h2>
+          <p>Tell me what you’re working on. We can start with a simple conversation about what your business needs.</p>
+        </div>
+        <a class="button" href="#contact">Start a Project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5"/></svg></a>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact">
+      <div class="wrap contact-grid">
+        <div class="contact-aside">
+          <p class="eyebrow">Get in touch</p>
+          <h2>Tell me what<br>you have in <em>mind.</em></h2>
+          <p>Share a few details about your project and I’ll have a better idea of how I can help.</p>
+          <div class="contact-detail"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="2.5" y="4" width="15" height="12" rx="1"/><path d="m3 5 7 6 7-6"/></svg>Contact through the project form</div>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required minlength="2"></div>
+          <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></div>
+          <div class="field"><label for="business">Business / Company</label><input id="business" name="business" type="text" autocomplete="organization" placeholder="Business name"></div>
+          <div class="field"><label for="project-type">Project type</label><select id="project-type" name="project-type" required>
+            <option value="" selected disabled>Select a service</option>
+            <option>Business website</option><option>Restaurant website</option><option>Landing page</option><option>Responsive web design</option><option>Website redesign</option><option>Not sure yet</option>
+          </select></div>
+          <div class="field full"><label for="message">A little about your project</label><textarea id="message" name="message" placeholder="What would you like your website to help you do?" required minlength="10"></textarea></div>
+          <div class="form-bottom"><p class="form-note">Demo contact form: this page does not send or store your information. Submission shows a local confirmation only.</p><button class="button" type="submit">Send Project Enquiry <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 8h10M8 3l5 5-5 5"/></svg></button></div>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <a class="brand" href="#top" aria-label="Zaki Koki — back to top"><span class="brand-mark" aria-hidden="true">ZK</span><span class="brand-name">Zaki Koki<span>Independent designer & developer</span></span></a>
+          <p>Modern, responsive websites for businesses ready to show up with confidence.</p>
+        </div>
+        <div class="footer-column"><h3>Explore</h3><a href="#work">Selected work</a><a href="#services">Services</a><a href="#about">About</a><a href="#process">Process</a></div>
+        <div class="footer-column"><h3>Services</h3><a href="#services">Business websites</a><a href="#services">Restaurant websites</a><a href="#services">Landing pages</a><a href="#services">Website redesign</a></div>
+        <div class="footer-column"><h3>Start a conversation</h3><a href="#contact">Project enquiry</a><a href="#faq">Common questions</a></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> Zaki Koki. Built with intention.</span><a href="#top" class="text-link">Back to top ↑</a></div>
+    </div>
+  </footer>
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const primaryNav = document.querySelector("#primary-nav");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation menu" : "Close navigation menu");
+      primaryNav.classList.toggle("is-open", !isOpen);
+    });
+
+    primaryNav.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        primaryNav.classList.remove("is-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+      }
+    });
+
+    document.querySelector("#contact-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!event.currentTarget.reportValidity()) return;
+      document.querySelector("#form-status").textContent =
+        "Thanks for sharing your project details. This demo form does not send your message, but your information has been validated in this browser.";
+      event.currentTarget.reset();
+    });
+
+    document.querySelector("#year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
